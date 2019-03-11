@@ -54,10 +54,21 @@ public class ElevensBoard extends Board {
     @Override
     public boolean isLegal(List<Integer> selectedCards) {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-        if(selectedCards.get())
-        {
+        boolean remove = false;
+        int cardOneValue = cardAt(selectedCards.get(0)).pointValue();
+        int cardTwoValue = cardAt(selectedCards.get(1)).pointValue();
 
+        String cardOneRank = cardAt(selectedCards.get(0)).rank();
+        String cardTwoRank = cardAt(selectedCards.get(1)).rank();
+        String cardThreeRank = cardAt(selectedCards.get(2)).rank();
+
+        //If the first two cards selected add up to 11 then it is a legal removal
+        if(cardOneValue + cardTwoValue == 11)
+        {
+          remove = true;
         }
+        
+        return remove;
     }
 
     /**
