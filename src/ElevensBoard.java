@@ -57,15 +57,40 @@ public class ElevensBoard extends Board {
         boolean remove = false;
         int cardOneValue = cardAt(selectedCards.get(0)).pointValue();
         int cardTwoValue = cardAt(selectedCards.get(1)).pointValue();
-
-        String cardOneRank = cardAt(selectedCards.get(0)).rank();
-        String cardTwoRank = cardAt(selectedCards.get(1)).rank();
-        String cardThreeRank = cardAt(selectedCards.get(2)).rank();
+        int kingcounter = 0;
+        int queencounter = 0;
+        int jackcounter = 0;
 
         //If the first two cards selected add up to 11 then it is a legal removal
         if(cardOneValue + cardTwoValue == 11)
         {
           remove = true;
+        }
+
+        //checks through the selected cards up to 3
+        //increments each king/queen/jack counter if it is detected
+        for(int i = 0; i < 2; i++)
+        {
+            if(cardAt(selectedCards.get(i)).rank().compareTo("king") == 0)
+            {
+                kingcounter++;
+            }
+
+            if(cardAt(selectedCards.get(i)).rank().compareTo("queen") == 0)
+            {
+                queencounter++;
+            }
+
+            if (cardAt(selectedCards.get(i)).rank().compareTo("jack") == 0)
+            {
+                jackcounter++;
+            }
+        }
+
+        //if there is only one jack, queen, and king detected then it is a legal removal
+        if(jackcounter == 1 && queencounter == 1 && kingcounter == 1)
+        {
+            remove = true;
         }
         
         return remove;
@@ -82,6 +107,43 @@ public class ElevensBoard extends Board {
     @Override
     public boolean anotherPlayIsPossible() {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        boolean valid = false;
+        int kingcounter = 0;
+        int queencounter = 0;
+        int jackcounter = 0;
+
+        //compares every single card on the board with every other card to see if they add up to 11
+        for (int i = 0 ; i < BOARD_SIZE; i++) {
+            for(int j = 0; j < BOARD_SIZE; j++) {
+                if (cardAt(i).pointValue() + cardAt(j).pointValue() == 11) {
+                 valid = true;
+                }
+            }
+        }
+
+        //checks through the board to see if there is a jack, queen, or king
+        for (int i = 0 ; i < BOARD_SIZE; i++) {
+            if(cardAt(i).rank().compareTo("king") == 0)
+            {
+                kingcounter++;
+            }
+            if(cardAt(i).rank().compareTo("queen") == 0)
+            {
+                queencounter++;
+            }
+            if(cardAt(i).rank().compareTo("jack") == 0)
+            {
+                jackcounter++;
+            }
+        }
+
+        //if there is at least one of each then another play is possible
+        if(kingcounter > 0 && queencounter > 0 && jackcounter > 0)
+        {
+            valid = true;
+        }
+
+        return valid;
     }
 
     /**
@@ -94,6 +156,17 @@ public class ElevensBoard extends Board {
      */
     private boolean containsPairSum11(List<Integer> selectedCards) {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        boolean remove = false;
+        int cardOneValue = cardAt(selectedCards.get(0)).pointValue();
+        int cardTwoValue = cardAt(selectedCards.get(1)).pointValue();
+
+        //If the first two cards selected add up to 11 then it is a legal removal
+        if(cardOneValue + cardTwoValue == 11)
+        {
+            remove = true;
+        }
+
+        return remove;
     }
 
     /**
@@ -106,5 +179,37 @@ public class ElevensBoard extends Board {
      */
     private boolean containsJQK(List<Integer> selectedCards) {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+        boolean remove = false;
+        int kingcounter = 0;
+        int queencounter = 0;
+        int jackcounter = 0;
+
+        //checks through the selected cards up to 3
+        //increments each king/queen/jack counter if it is detected
+        for(int i = 0; i < 2; i++)
+        {
+            if(cardAt(selectedCards.get(i)).rank().compareTo("king") == 0)
+            {
+                kingcounter++;
+            }
+
+            if(cardAt(selectedCards.get(i)).rank().compareTo("queen") == 0)
+            {
+                queencounter++;
+            }
+
+            if (cardAt(selectedCards.get(i)).rank().compareTo("jack") == 0)
+            {
+                jackcounter++;
+            }
+        }
+
+        //if there is only one jack, queen, and king detected then it is a legal removal
+        if(jackcounter == 1 && queencounter == 1 && kingcounter == 1)
+        {
+            remove = true;
+        }
+
+        return remove;
     }
 }
