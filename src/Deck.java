@@ -99,8 +99,11 @@ public class Deck {
      */
     public Card deal() {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-        Card aCard = cards.get(size-1);
-        size--;
+        if(size > 0) {
+            size--;
+        }
+        Card aCard = cards.get(size);
+
         return aCard;
     }
 

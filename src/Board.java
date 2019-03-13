@@ -34,6 +34,7 @@ public abstract class Board {
     public Board(int size, String[] ranks, String[] suits, int[] pointValues) {
         cards = new Card[size];
         deck = new Deck(ranks, suits, pointValues);
+        deck.shuffle();
         if (I_AM_DEBUGGING) {
             System.out.println(deck);
             System.out.println("----------");
