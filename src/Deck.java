@@ -81,6 +81,8 @@ public class Deck {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
         int randomIndex;
         Card cardHolder;
+        size = 52; ////////////////This LINE NEEDS EDITING///////////////////
+        /////////////////////////////////////////////////////
 
         //Iterates through the list swapping the each index's element with another random index's element
         for(int i = 0; i < size; i++)
@@ -103,6 +105,7 @@ public class Deck {
             size--;
         }
         Card aCard = cards.get(size);
+        cards.remove(size);
 
         return aCard;
     }
