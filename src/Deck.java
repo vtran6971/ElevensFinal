@@ -15,6 +15,7 @@ public class Deck {
      * cards contains all the cards in the deck.
      */
     private List<Card> cards = new ArrayList<Card>();
+    private List<Card> copy = cards;
 
     /**
      * size is the number of not-yet-dealt cards.
@@ -55,7 +56,7 @@ public class Deck {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
         boolean bool = false;
 
-        if (cards.size() == 0)
+        if (copy.size() == 0)
         {
             bool = true;
         }
@@ -69,7 +70,7 @@ public class Deck {
      */
     public int size() {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-        size = cards.size();
+        size = copy.size();
         return size;
     }
 
@@ -79,18 +80,18 @@ public class Deck {
      */
     public void shuffle() {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+        size = cards.size();
         int randomIndex;
         Card cardHolder;
-        size = 52; ////////////////This LINE NEEDS EDITING///////////////////
-        /////////////////////////////////////////////////////
+
 
         //Iterates through the list swapping the each index's element with another random index's element
         for(int i = 0; i < size; i++)
         {
-            randomIndex = (int)(Math.random()*(size));
-            cardHolder = cards.get(i);
-            cards.set(i, cards.get(randomIndex));
-            cards.set(randomIndex, cardHolder);
+            randomIndex = ((int)(Math.random()*(size)));
+            cardHolder = copy.get(i);
+            copy.set(i, copy.get(randomIndex));
+            copy.set(randomIndex, cardHolder);
         }
     }
 
@@ -104,8 +105,8 @@ public class Deck {
         if(size > 0) {
             size--;
         }
-        Card aCard = cards.get(size);
-        cards.remove(size);
+        Card aCard = copy.get(size);
+        copy.remove(size);
 
         return aCard;
     }
